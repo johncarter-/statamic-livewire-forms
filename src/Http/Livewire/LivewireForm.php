@@ -14,6 +14,8 @@ class LivewireForm extends Component
 {
     public $formHandle;
     public $fields;
+    public $success;
+
     protected $form;
 
     public function mount($formHandle)
@@ -61,6 +63,9 @@ class LivewireForm extends Component
 
         SubmissionCreated::dispatch($submission);
         SendEmails::dispatch($submission, $site);
+
+        $this->reset();
+        $this->success = true;
     }
 
     public function render()
