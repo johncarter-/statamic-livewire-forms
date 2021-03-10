@@ -10,6 +10,7 @@ class ServiceProvider extends AddonServiceProvider
 {
     public function boot()
     {
+        parent::boot();
         Livewire::component('livewire-form', LivewireForm::class);
     }
 }
