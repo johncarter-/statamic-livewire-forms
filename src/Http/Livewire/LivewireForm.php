@@ -64,7 +64,7 @@ class LivewireForm extends Component
         SubmissionCreated::dispatch($submission);
         SendEmails::dispatch($submission, $site);
 
-        $this->reset(array_keys($validatedData['fields']));
+        $this->reset(array_keys($this->rules()));
         $this->success = true;
     }
 
