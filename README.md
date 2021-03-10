@@ -12,7 +12,7 @@ composer require johncarter/statamic-livewire-forms
 
 ## Usage
 
-1. Include Livewire styles and scripts in your layout.
+1. Include [Livewire styles and scripts](https://github.com/jonassiewertsen/statamic-livewire#how-to-be-used-with-the-antlers-template-engine) in your layout.
 2. [Create your form](https://statamic.dev/forms#create-the-form) in Statamic.
 3. Create a Livewire view component using the snake case name of your form. e.g. If my form's name was `Contact Form` then my view would like this be: `resources/views/livewire/contact-form.blade.php`. You _can_ use Antlers but accessing the default Laravel Error Bag isn't supported yet. See https://github.com/statamic/ideas/issues/179
 4. Add this boilerplate to your view component to get started:
