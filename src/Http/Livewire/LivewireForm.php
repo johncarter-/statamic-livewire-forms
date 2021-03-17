@@ -12,15 +12,17 @@ use Illuminate\Support\Str;
 
 class LivewireForm extends Component
 {
-    public $formHandle;
+    public $handle;
+    public $view;
     public $fields;
     public $success;
 
     protected $form;
 
-    public function mount($formHandle)
+    public function mount($handle, $view = null)
     {
-        $this->formHandle = $formHandle;
+        $this->handle = $handle;
+        $this->view = $view ?? Str::slug($this->handle);
         $this->getForm();
         $this->fields = array_fill_keys($this->form->blueprint()->fields()->all()->keys()->toArray(), '');
     }
@@ -32,7 +34,7 @@ class LivewireForm extends Component
 
     private function getForm()
     {
-        $this->form = Form::find($this->formHandle);
+        $this->form = Form::find($this->handle);
     }
 
     protected function rules()
@@ -70,6 +72,6 @@ class LivewireForm extends Component
 
     public function render()
     {
-        return view('livewire.' . Str::slug($this->formHandle));
+        return view('livewire.' . $this->view);
     }
 }
