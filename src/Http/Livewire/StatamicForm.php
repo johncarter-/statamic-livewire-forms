@@ -79,6 +79,6 @@ class StatamicForm extends Component
 
     public function render()
     {
-        return view('livewire.' . $this->view);
+        return view('livewire.statamic-forms.' . $this->view);
     }
 }

@@ -37,15 +37,15 @@ class MakeViewCommand extends Command
 
         $viewName = $this->ask('Name the view file:', Str::slug($form->get('handle')));
 
-        File::ensureDirectoryExists(resource_path('views/livewire/'));
+        File::ensureDirectoryExists(resource_path('views/livewire/statamic-forms/'));
 
-        $destination = resource_path('views/livewire/' . $viewName . '.blade.php');
+        $destination = resource_path('views/livewire/statamic-forms/' . $viewName . '.blade.php');
 
         if (file_exists($destination)) {
             return $this->comment('The view already exists: ' . $this->getRelativePath($destination));
         }
 
-        copy(__DIR__ . '/../../stubs/resources/views/livewire/form.blade.php', resource_path('views/livewire/' . $viewName . '.blade.php'));
+        copy(__DIR__ . '/../../stubs/resources/views/livewire/statamic-forms/form.blade.php', resource_path('views/livewire/statamic-forms/' . $viewName . '.blade.php'));
 
         $this->info('View was created: ' . $this->getRelativePath($destination));
     }

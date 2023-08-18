@@ -23,14 +23,19 @@
 
                 <div class="{{ $colSpanClass }}">
                     <label>
-                        <span class="block w-full">{{ $config['display'] }}</span>
                         @switch($config['type'])
                             @case('text')
-                                <input class="w-full" type="{{ $config['input_type'] }}" wire:model.lazy="data.{{ $fieldHandle }}">
+                                <span class="block w-full sr-only">{{ $config['display'] }}</span>
+                                <input class="w-full" type="{{ $config['input_type'] }}" placeholder="{{ $config['display'] }}" wire:model.lazy="data.{{ $fieldHandle }}">
                             @break
 
                             @case('textarea')
-                                <textarea class="w-full" wire:model.lazy="data.{{ $fieldHandle }}"></textarea>
+                                <span class="block w-full sr-only">{{ $config['display'] }}</span>
+                                <textarea class="w-full" placeholder="{{ $config['display'] }}" wire:model.lazy="data.{{ $fieldHandle }}"></textarea>
+                            @break
+
+                            @case('checkboxes')
+                                <input type="checkbox" wire:model.lazy="data.{{ $fieldHandle }}"> <span class="pl-4">{{ $config['display'] }}</span>
                             @break
 
                             @default

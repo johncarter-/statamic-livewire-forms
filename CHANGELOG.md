@@ -3,7 +3,7 @@
 - Fixed error when no livewire view directory exists.
 - Changed data binding property from `field.*` to `data.*`
 - Added automatic field rendering example to the form component stub.
-
+- Changed default view directory for components.
 
 ## [0.4.0] - 2021-03-17
 ### Added
