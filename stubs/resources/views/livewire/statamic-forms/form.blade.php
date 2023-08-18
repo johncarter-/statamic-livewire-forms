@@ -25,12 +25,12 @@
                     <label>
                         @switch($config['type'])
                             @case('text')
-                                <span class="block w-full sr-only">{{ $config['display'] }}</span>
+                                <span class="block w-full">{{ $config['display'] }}</span>
                                 <input class="w-full" type="{{ $config['input_type'] }}" placeholder="{{ $config['display'] }}" wire:model.lazy="data.{{ $fieldHandle }}">
                             @break
 
                             @case('textarea')
-                                <span class="block w-full sr-only">{{ $config['display'] }}</span>
+                                <span class="block w-full">{{ $config['display'] }}</span>
                                 <textarea class="w-full" placeholder="{{ $config['display'] }}" wire:model.lazy="data.{{ $fieldHandle }}"></textarea>
                             @break
 
