@@ -2,9 +2,7 @@
     "name": "johncarter/statamic-livewire-forms",
     "description": "Use Laravel Livewire to submit forms created in Statamic CMS.",
     "require": {
-        "php": "^7.4 || ^8.0",
-        "laravel/framework": "^7.0 || ^8.0",
-        "statamic/cms": "3.*",
+        "statamic/cms": "3.* || 4.*",
         "jonassiewertsen/statamic-livewire": "^2.4"
     },
     "autoload": {

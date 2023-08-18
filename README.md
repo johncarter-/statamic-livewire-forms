@@ -31,7 +31,7 @@ Include Livewire styles and scripts:
 Run command to generate the view:
 
 ```bash
-php artisan make:statamic-livewire-form-view
+php artisan statamic-livewire-forms:make:view
 ```
 
 Or, create the view manually in `/resources/views/livewire/form-view.blade.php`.
@@ -45,7 +45,7 @@ Bind properties in the view like this:
 Embed the livewire component in your template:
 
 ```html
-{{ livewire:livewire-form handle="contact_form" }}
+{{ livewire:statamic-form handle="contact_form" }}
 ```
 If no `view` parameter is set, the component will default to the kebab case of the form handle e.g. `/resources/views/livewire/contact-form.blade.php`
 

@@ -9,11 +9,13 @@ use Statamic\Facades\Form;
 use Statamic\Facades\Site;
 use Statamic\Forms\SendEmails;
 use Illuminate\Support\Str;
+use Statamic\Fields\Field;
 
-class LivewireForm extends Component
+class StatamicForm extends Component
 {
     public $handle;
     public $view;
+    public $data;
     public $fields;
     public $success;
 
@@ -24,7 +26,12 @@ class LivewireForm extends Component
         $this->handle = $handle;
         $this->view = $view ?? Str::slug($this->handle);
         $this->getForm();
-        $this->fields = array_fill_keys($this->form->blueprint()->fields()->all()->keys()->toArray(), '');
+        $this->data = array_fill_keys($this->form->blueprint()->fields()->all()->keys()->toArray(), '');
+        $this->fields = $this->form->blueprint()->fields()->all()->mapWithKeys(function (Field $field, string $fieldHandle) {
+            $fieldConfig = $field->config();
+            unset($fieldConfig['validate']);
+            return [$fieldHandle => $fieldConfig];
+        })->all();
     }
 
     public function hydrate()
@@ -40,14 +47,14 @@ class LivewireForm extends Component
     protected function rules()
     {
         return $this->form->blueprint()->fields()->all()->mapWithKeys(function ($field) {
-            return ['fields.' . $field->handle() => collect($field->rules())->flatten()];
+            return ['data.' . $field->handle() => collect($field->rules())->flatten()];
         })->toArray();
     }
 
     protected function validationAttributes()
     {
         return $this->form->blueprint()->fields()->all()->mapWithKeys(function ($field) {
-            return ['fields.' . $field->handle() => $field->display()];
+            return ['data.' . $field->handle() => $field->display()];
         })->toArray();
     }
 
@@ -57,7 +64,7 @@ class LivewireForm extends Component
 
         $validatedData = $this->validate();
 
-        $submission = $this->form->makeSubmission()->data($validatedData['fields']);
+        $submission = $this->form->makeSubmission()->data($validatedData['data']);
 
         if ($this->form->store()) {
             $submission->save();
@@ -66,7 +73,7 @@ class LivewireForm extends Component
         SubmissionCreated::dispatch($submission);
         SendEmails::dispatch($submission, $site);
 
-        $this->reset('fields');
+        $this->reset('data');
         $this->success = true;
     }
 

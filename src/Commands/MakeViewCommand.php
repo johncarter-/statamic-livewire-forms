@@ -3,18 +3,23 @@
 namespace Johncarter\StatamicLivewireForms\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\File;
 use Statamic\Facades\Form;
 use Illuminate\Support\Str;
 
 class MakeViewCommand extends Command
 {
-    public $signature = 'make:statamic-livewire-form-view';
+    public $signature = 'statamic-livewire-forms:make:view';
 
     public $description = 'Create form component views based on current Statamic forms';
 
     public function handle()
     {
         $availableForms = Form::all();
+
+        if (!$availableForms->count()) {
+            return $this->info("Whoops! You haven't created any forms in Statamic yet.");
+        }
 
         $formTitles = $availableForms->map(function ($form) {
             return $form->title();
@@ -31,6 +36,8 @@ class MakeViewCommand extends Command
         })->first()->toAugmentedCollection();
 
         $viewName = $this->ask('Name the view file:', Str::slug($form->get('handle')));
+
+        File::ensureDirectoryExists(resource_path('views/livewire/'));
 
         $destination = resource_path('views/livewire/' . $viewName . '.blade.php');
 
