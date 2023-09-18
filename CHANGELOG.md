@@ -1,3 +1,8 @@
+## [1.0.1] - 2023-09-18
+### Added
+- Added `required` to be available in field config for conditional front end rendering.
+
+
 ## [1.0.0] - 2023-09-18
 ### Added
 - Added automatic field rendering example to the form component stub.
