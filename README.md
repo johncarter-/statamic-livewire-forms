@@ -38,8 +38,8 @@ Or, create the view manually in `/resources/views/livewire/form-view.blade.php`.
 
 Bind properties in the view like this:
 ```html
-<input autocomplete="name" type="text" wire:model.lazy="fields.name" />
-@error('fields.name')<div>{{ $message }}</div>@enderror
+<input autocomplete="name" type="text" wire:model.lazy="data.name" />
+@error('data.name')<div>{{ $message }}</div>@enderror
 ```
 
 Embed the livewire component in your template:

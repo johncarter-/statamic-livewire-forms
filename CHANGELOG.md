@@ -1,9 +1,15 @@
-## Unreleased
-- Changed livewire component name from `livewire:livewire-form` to `livewire:statamic-form`.
-- Fixed error when no livewire view directory exists.
-- Changed data binding property from `field.*` to `data.*`
+## [2.0.0] - 2023-09-18
+### Added
 - Added automatic field rendering example to the form component stub.
+
+## Changed
+- Changed livewire component name from `livewire:livewire-form` to `livewire:statamic-form`.
+- Changed data binding property from `field.*` to `data.*`
 - Changed default view directory for components.
+
+### Fixed
+- Fixed error when no livewire view directory exists.
+
 
 ## [0.4.0] - 2021-03-17
 ### Added
