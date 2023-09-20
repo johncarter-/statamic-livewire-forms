@@ -29,8 +29,12 @@ class StatamicForm extends Component
         $this->data = array_fill_keys($this->form->blueprint()->fields()->all()->keys()->toArray(), '');
         $this->fields = $this->form->blueprint()->fields()->all()->mapWithKeys(function (Field $field, string $fieldHandle) {
             $fieldConfig = $field->config();
-            $fieldConfig['required'] = in_array('required', $fieldConfig['validate']);
-            unset($fieldConfig['validate']);
+            
+            if(array_key_exists('validate', $fieldConfig)) {
+                $fieldConfig['required'] = in_array('required', $fieldConfig['validate']);
+                unset($fieldConfig['validate']);
+            }
+            
             return [$fieldHandle => $fieldConfig];
         })->all();
     }
